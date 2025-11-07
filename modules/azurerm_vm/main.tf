@@ -48,4 +48,13 @@ resource "azurerm_linux_virtual_machine" "vm" {
             offer = source_image_reference.value.offer
         } 
     }
+    custom_data = base64encode(<<-EOF
+              #!/bin/bash
+              sudo apt-get update -y
+              sudo apt-get install nginx -y
+              sudo systemctl enable nginx
+              sudo systemctl start nginx
+              echo "<h1>Welcome to NGINX - deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
+          EOF
+  )
 }
