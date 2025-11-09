@@ -1,24 +1,24 @@
 rgs = {
-  rg1 = {
-    name = "rg1"
+  todo-app = {
+    name = "todo-app"
     location = "West US"    
   }
 }
 
 vnets = {
-  vnet1 = {
-    name = "vnet1"
-    resource_group_name = "rg1"
+  todo-vnet = {
+    name = "todo-vnet"
+    resource_group_name = "todo-app"
     location = "West US"
     address_space = ["10.0.0.0/16"]
 
     subnet = [
         {
-            name = "subnet1"
+            name = "frontend-subnet"
             address_prefixes = ["10.0.1.0/24"] 
         },
         {
-            name = "subnet2"
+            name = "backend-subnet"
             address_prefixes = ["10.0.2.0/24"] 
         }
 
@@ -28,14 +28,14 @@ vnets = {
 
 pips = {
     pip1 = {
-        name = "pip1"
-        resource_group_name = "rg1"
+        name = "frontend-pip"
+        resource_group_name = "todo-app"
         location = "West US"
         allocation_method = "Static"
     }
     pip2 = {
-        name = "pip2"
-        resource_group_name = "rg1"
+        name = "backend-pip"
+        resource_group_name = "todo-app"
         location = "West US"
         allocation_method = "Static"
     }
@@ -43,11 +43,11 @@ pips = {
 
 nsgs = {
     nsg1 = {
-        name = "nsg1"
-        resource_group_name = "rg1"
+        name = "frontend-nsg"
+        resource_group_name = "todo-app"
         location = "West US"
-        subnet_name = "subnet1"
-        vnet_name = "vnet1"
+        subnet_name = "frontend-subnet"
+        vnet_name = "todo-vnet"
 
         security_rule = [{
           access = "Allow"
@@ -62,11 +62,11 @@ nsgs = {
         }]
     }
     nsg2 = {
-        name = "nsg2"
-        resource_group_name = "rg1"
+        name = "backend-nsg"
+        resource_group_name = "todo-app"
         location = "West US"
-        subnet_name = "subnet2"
-        vnet_name = "vnet1"
+        subnet_name = "backend-subnet"
+        vnet_name = "todo-vnet"
 
         security_rule = [{
           access = "Allow"
@@ -84,8 +84,8 @@ nsgs = {
 
 keys = {
   key1 = {
-    name = "keyanji"
-    resource_group_name = "rg1"
+    name = "todoapp-key"
+    resource_group_name = "todo-app"
     location = "West US"
     sku_name = "standard"
   }
@@ -93,26 +93,26 @@ keys = {
 
 secrets = {
   secret1 = {
-    key_name = "keyanji"
-    resource_group_name = "rg1"
+    key_name = "todoapp-key"
+    resource_group_name = "todo-app"
     secret_name = "vm1"
     secret_value = "anjali1"
   }
   secret2 = {
-    key_name = "keyanji"
-    resource_group_name = "rg1"
+    key_name = "todoapp-key"
+    resource_group_name = "todo-app"
     secret_name = "password1"
     secret_value = "anjali@12345"
   }
   secret3 = {
-    key_name = "keyanji"
-    resource_group_name = "rg1"
+    key_name = "todoapp-key"
+    resource_group_name = "todo-app"
     secret_name = "vm2"
     secret_value = "anjali2"
   }
     secret4 = {
-    key_name = "keyanji"
-    resource_group_name = "rg1"
+    key_name = "todoapp-key"
+    resource_group_name = "todo-app"
     secret_name = "password2"
     secret_value = "anjali@12345"
   }
@@ -120,23 +120,24 @@ secrets = {
 
 vms = {
     vm1 = {
-        subnet_name = "subnet1"
-        vnet_name = "vnet1"
-        pip_name = "pip1"
-        key_name = "keyanji"
+        subnet_name = "frontend-subnet"
+        vnet_name = "todo-vnet"
+        pip_name = "frontend-pip"
+        key_name = "todoapp-key"
         secret_name = "vm1"
         secret_value = "password1"
 
-        nic_name = "nic1"
+        nic_name = "frontend-nic"
         location = "West US"
-        resource_group_name = "rg1"
+        resource_group_name = "todo-app"
         ip_configuration = [{
                   name = "internal"
                   private_ip_address_allocation = "Dynamic"
         }]
 
-        vm_name = "vm1"
+        vm_name = "frontend-vm"
         size = "Standard_F2"
+        script_name = "./nginx.sh"
         os_disk = [
             {
                 caching              = "ReadWrite"
@@ -154,16 +155,16 @@ vms = {
 
     }
      vm2 = {
-        subnet_name = "subnet2"
-        vnet_name = "vnet1"
-        pip_name = "pip2"
-        key_name = "keyanji"
+        subnet_name = "backend-subnet"
+        vnet_name = "todo-vnet"
+        pip_name = "backend-pip"
+        key_name = "todoapp-key"
         secret_name = "vm2"
         secret_value = "password2"
 
-        nic_name = "nic2"
+        nic_name = "backend-nic"
         location = "West US"
-        resource_group_name = "rg1"
+        resource_group_name = "todo-app"
         ip_configuration = [{
                   name = "internal"
                   private_ip_address_allocation = "Dynamic"
@@ -194,7 +195,7 @@ servers = {
   server1 = {
     name = "anjaliserver1"
     location = "West US"
-    resource_group_name = "rg1"
+    resource_group_name = "todo-app"
     administrator_login = "server12"
     administrator_login_password = "Anjali@12345"
     version                      = "12.0"
@@ -209,8 +210,8 @@ servers = {
 databases = {
   db1 = {
       name = "anjalidb121"
-        server_name = "anjaliserver1"
-        resource_group_name = "rg1"
+      server_name = "anjaliserver1"
+      resource_group_name = "todo-app"
       collation    = "SQL_Latin1_General_CP1_CI_AS"
       license_type = "LicenseIncluded"
       max_size_gb  = 2

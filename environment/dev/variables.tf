@@ -104,6 +104,7 @@ variable "vms" {
         sku = string
         version = string
     }))
+    script_name = optional(string)
     }))
 }
 
