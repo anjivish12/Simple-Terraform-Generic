@@ -219,3 +219,15 @@ databases = {
       enclave_type = "VBS"
   }
 }
+
+
+stgs = {
+  stg1 = {
+    name = "stganji12"
+    location = "West US"
+    resource_group_name = "todo-app"
+    account_tier             = "Standard"
+    account_replication_type = "GRS"
+
+  }
+}

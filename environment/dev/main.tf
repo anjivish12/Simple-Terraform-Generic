@@ -48,3 +48,10 @@ module "database" {
     databases =  var.databases
   
 }
+
+module "stgs" {
+    depends_on = [ module.rg ]
+    source = "../../modules/azurerm_storage_account"
+    stgs = var.stgs
+  
+}
