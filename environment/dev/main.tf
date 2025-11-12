@@ -55,3 +55,16 @@ module "stgs" {
     stgs = var.stgs
   
 }
+
+module "acr" {
+    depends_on = [ module.rg ]
+    source = "../../modules/azurerm_acr"
+    acrs = var.acrs 
+}
+
+module "aks" {
+    depends_on = [ module.rg ]
+    source = "../../modules/azurerm_aks"
+    aks = var.aks
+  
+}

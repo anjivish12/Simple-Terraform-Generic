@@ -84,7 +84,7 @@ nsgs = {
 
 keys = {
   key1 = {
-    name = "todoapp-key"
+    name = "todoapp-key1"
     resource_group_name = "todo-app"
     location = "West US"
     sku_name = "standard"
@@ -93,25 +93,25 @@ keys = {
 
 secrets = {
   secret1 = {
-    key_name = "todoapp-key"
+    key_name = "todoapp-key1"
     resource_group_name = "todo-app"
     secret_name = "vm1"
     secret_value = "anjali1"
   }
   secret2 = {
-    key_name = "todoapp-key"
+    key_name = "todoapp-key1"
     resource_group_name = "todo-app"
     secret_name = "password1"
     secret_value = "anjali@12345"
   }
   secret3 = {
-    key_name = "todoapp-key"
+    key_name = "todoapp-key1"
     resource_group_name = "todo-app"
     secret_name = "vm2"
     secret_value = "anjali2"
   }
     secret4 = {
-    key_name = "todoapp-key"
+    key_name = "todoapp-key1"
     resource_group_name = "todo-app"
     secret_name = "password2"
     secret_value = "anjali@12345"
@@ -123,7 +123,7 @@ vms = {
         subnet_name = "frontend-subnet"
         vnet_name = "todo-vnet"
         pip_name = "frontend-pip"
-        key_name = "todoapp-key"
+        key_name = "todoapp-key1"
         secret_name = "vm1"
         secret_value = "password1"
 
@@ -158,7 +158,7 @@ vms = {
         subnet_name = "backend-subnet"
         vnet_name = "todo-vnet"
         pip_name = "backend-pip"
-        key_name = "todoapp-key"
+        key_name = "todoapp-key1"
         secret_name = "vm2"
         secret_value = "password2"
 
@@ -223,11 +223,39 @@ databases = {
 
 stgs = {
   stg1 = {
-    name = "stganji12"
+    name = "stganji1289"
     location = "West US"
     resource_group_name = "todo-app"
     account_tier             = "Standard"
     account_replication_type = "GRS"
 
   }
+}
+
+acrs = {
+    acr1 = {
+        name = "acrwanjali1"
+        resource_group_name = "todo-app"
+        location = "West US"
+        sku = "Premium"
+        admin_enabled = false
+    }
+}
+
+aks = {
+    aks1 = {
+        name = "aks-1"
+        resource_group_name = "todo-app"
+        location = "Central US"
+        dns_prefix = "dns1"
+        default_node_pool = [{
+           name       = "default"
+           node_count = 1
+           vm_size    = "Standard_A2_v2"
+        }]
+        identity = [{
+            type = "SystemAssigned"
+        }]
+
+    }
 }

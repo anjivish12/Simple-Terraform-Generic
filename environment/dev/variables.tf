@@ -148,7 +148,33 @@ variable "stgs" {
       location = string
       account_tier = string
       account_replication_type = string 
-      tags = map(object)
+      tags = optional(map(string))
 
     }))
+}
+variable "acrs" {
+    type = map(object({
+      name = string
+      resource_group_name = string
+      location = string
+      sku = string
+      admin_enabled = bool
+    })) 
+}
+
+variable "aks" {
+    type = map(object({
+      name = string
+      resource_group_name = string
+      location = string
+      dns_prefix = string
+      default_node_pool = list(object({
+        name = string
+        node_count = number
+        vm_size = string 
+      }))
+      identity = list(object({
+        type = string
+      }))
+    }))  
 }
