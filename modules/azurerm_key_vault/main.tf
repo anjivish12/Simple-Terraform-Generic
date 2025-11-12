@@ -1,6 +1,6 @@
 data "azurerm_client_config" "current" {}
 
-resource "azurerm_key_vault" "example" {
+resource "azurerm_key_vault" "key_vault" {
   for_each = var.keys
   name                        = each.value.name
   location                    = each.value.location
