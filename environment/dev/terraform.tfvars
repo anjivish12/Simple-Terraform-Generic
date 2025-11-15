@@ -239,6 +239,13 @@ acrs = {
         location = "West US"
         sku = "Premium"
         admin_enabled = false
+        georeplications = [
+            {
+                location                = "North Europe"
+                zone_redundancy_enabled = true
+                tags                    = {}
+            }
+        ]
     }
 }
 

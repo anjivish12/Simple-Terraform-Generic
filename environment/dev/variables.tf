@@ -159,6 +159,13 @@ variable "acrs" {
       location = string
       sku = string
       admin_enabled = bool
+      georeplications = list(object({
+        location = string
+        zone_redundancy_enabled = optional(bool)
+        tags = optional(map(string))
+
+
+      }))
     })) 
 }
 
