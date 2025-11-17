@@ -36,6 +36,11 @@ jobs:
         run: terraform plan -no-color -input=false
         working-directory: environment\dev
 
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve -no-color -input=false
+        working-directory: environment\dev
+
       
            
 
